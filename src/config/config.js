@@ -6,4 +6,16 @@ const config = {
   appwriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
 };
 
+if (
+  !config.appwriteUrl ||
+  !config.appwriteProjectId ||
+  !config.appwriteDatabaseId ||
+  !config.appwriteCollectionId ||
+  !config.appwriteBucketId
+) {
+  throw new Error(
+    "Appwrite configuration is missing. Please check your environment variables.",
+  );
+}
+
 export default config;
