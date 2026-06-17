@@ -33,10 +33,10 @@ export class AuthServices {
 
   async login({ email, password }) {
     try {
-      const user = await this.account.createEmailPasswordSession({
+      const user = await this.account.createEmailPasswordSession(
         email,
         password,
-      });
+      );  // createEmailPasswordSession me object nhi dete ye eak function hai to sidhe hi parameter pass karte hai
       if (!user) {
         console.log("failed to login user");
       }
