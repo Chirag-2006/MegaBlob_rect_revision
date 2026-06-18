@@ -52,12 +52,15 @@ export class AuthServices {
       return await this.account.deleteSessions();
     } catch (error) {
       console.error("appwrite Error :: logout :", error);
+      return null
     }
   }
 
   async getCurrentUser() {
     try {
+      console.log("enter in getCurrent user funciton")
       const user = await this.account.get();
+      console.log("user",user)
       return user;
     } catch (error) {
       console.error("appwrite Error :: getCurrentUser :", error);
