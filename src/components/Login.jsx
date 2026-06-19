@@ -72,6 +72,10 @@ function Login() {
               placeholder="Enter your password"
               {...register("password", {
                 required: true,
+                minLength: {
+                  value: 4,
+                  message: "Password must be at least 6 characters",
+                },
               })}
             />
             <Buttton type="submit" className="w-full">
