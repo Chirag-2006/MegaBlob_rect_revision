@@ -10,7 +10,7 @@ function Home() {
 
   useEffect(() => {
     if (userData) {
-      dbServices.getPosts([]).then((allPosts) => {
+      dbServices.getPosts().then((allPosts) => {
         if (allPosts) {
           setPosts(allPosts.rows);
         }
