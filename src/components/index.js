@@ -7,6 +7,8 @@ import Input from "./Input";
 import Logo from "./Logo";
 import RTE from "./RTE";
 import Select from "./Select";
+import SignUp from "./SignUp";
+import Login from "./Login"
 
 export {
   Header,
@@ -18,4 +20,6 @@ export {
   Input,
   Select,
   RTE,
+  SignUp,
+  Login
 };
