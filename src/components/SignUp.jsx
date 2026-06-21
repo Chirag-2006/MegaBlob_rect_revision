@@ -65,6 +65,8 @@ function SignUp() {
               />
               <Input
                 label={"Email: "}
+                type="email"
+                autoComplete="email"
                 placeholder="Enter your email"
                 {...register("email", {
                   required: true,
@@ -78,6 +80,8 @@ function SignUp() {
               />
               <Input
                 label={"Password: "}
+                type="password"
+                autoComplete="new-password"
                 placeholder="Enter your password"
                 {...register("password", {
                   required: true,

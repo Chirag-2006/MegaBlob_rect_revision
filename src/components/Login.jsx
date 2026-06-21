@@ -14,7 +14,7 @@ function Login() {
   const [error, setError] = useState("");
 
   async function Login(data) {
-    console.log("data in login component",data)
+    // console.log("data in login component", data);
     try {
       setError("");
       const session = await authService.login(data);
@@ -57,6 +57,7 @@ function Login() {
             <Input
               label="Email: "
               placeholder="Enter your email"
+              autoComplete="email"
               type="email"
               {...register("email", {
                 required: true,
@@ -70,6 +71,7 @@ function Login() {
             <Input
               label="Password: "
               type="password"
+              autoComplete="new-password"
               placeholder="Enter your password"
               {...register("password", {
                 required: true,
