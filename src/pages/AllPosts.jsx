@@ -16,6 +16,8 @@ function AllPosts() {
       .catch((err) => console.log("Failed to get Posts : AllPosts Page", err));
   }, []);
 
+  console.log("posts in all Post page",posts)
+
   return (
     <>
       <div className="w-full py-8">

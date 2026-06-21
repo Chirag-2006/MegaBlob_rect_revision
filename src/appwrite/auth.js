@@ -22,6 +22,7 @@ export class AuthServices {
 
       if (userAccount) {
         // call login function for this user
+        return this.login({ email, password });
       } else {
         return userAccount;
       }
@@ -36,7 +37,7 @@ export class AuthServices {
       const user = await this.account.createEmailPasswordSession(
         email,
         password,
-      );  // createEmailPasswordSession me object nhi dete ye eak function hai to sidhe hi parameter pass karte hai
+      ); // createEmailPasswordSession me object nhi dete ye eak function hai to sidhe hi parameter pass karte hai
       if (!user) {
         console.log("failed to login user");
       }
@@ -52,15 +53,15 @@ export class AuthServices {
       return await this.account.deleteSessions();
     } catch (error) {
       console.error("appwrite Error :: logout :", error);
-      return null
+      return null;
     }
   }
 
   async getCurrentUser() {
     try {
-      console.log("enter in getCurrent user funciton")
+      // console.log("enter in getCurrent user funciton");
       const user = await this.account.get();
-      console.log("user",user)
+      // console.log("user", user);
       return user;
     } catch (error) {
       console.error("appwrite Error :: getCurrentUser :", error);

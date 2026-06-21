@@ -41,7 +41,14 @@ export class StorageServices {
   }
 
   filePreview(fileId) {
-    return this.storage.getFilePreview(config.appwriteBucketId, fileId);
+    try {
+      const result = this.storage.getFileView(config.appwriteBucketId, fileId);
+      console.log("restul in filePrevei" ,result)
+      return result
+    } catch (error) {
+      console.error("appwrite Error :: getFilePreview :", error);
+      throw error;
+    }
   }
 }
 

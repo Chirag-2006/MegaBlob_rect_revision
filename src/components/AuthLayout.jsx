@@ -20,15 +20,15 @@ function AuthLayout({ children, authentication = true }) {
 
       //let authValue = authStatus === true ? true : false
 
-    //   if (authentication) {
-    //     if (!authStatus) {
-    //       navigate("/login");
-    //     }
-    //   } else {
-    //     if (authStatus) {
-    //       navigate("/");
-    //     }
-    //   }
+      //   if (authentication) {
+      //     if (!authStatus) {
+      //       navigate("/login");
+      //     }
+      //   } else {
+      //     if (authStatus) {
+      //       navigate("/");
+      //     }
+      //   }
 
       if (authentication && authStatus !== authentication) {
         navigate("/login");
@@ -41,7 +41,7 @@ function AuthLayout({ children, authentication = true }) {
     checkAuthentication();
   }, [authStatus, navigate, authentication]);
 
-  return <>{loading ? <p>Loading...</p> : { children }}</>;
+  return <>{loading ? <p>Loading...</p> : children}</>;
 }
 
 export default AuthLayout;
