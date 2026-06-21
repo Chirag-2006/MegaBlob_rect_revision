@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import dbServices from "../appwrite/database";
 import { Container, PostCard } from "../components";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+
+  const userData = useSelector((state) => state.userData);
+
   useEffect(() => {
-    dbServices.getPosts([]).then((allPosts) => {
-      if (allPosts) {
-        setPosts(allPosts.rows);
-      }
-    });
+    if (userData) {
+      dbServices.getPosts([]).then((allPosts) => {
+        if (allPosts) {
+          setPosts(allPosts.rows);
+        }
+      });
+    }
   }, []);
-  if (posts.length === 0) {
+
+  if (!userData) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <Container>
@@ -27,19 +34,35 @@ function Home() {
     );
   }
 
-  return(
-    <div className="w-full py-8">
+  if (!posts || posts.length === 0) {
+    return (
+      <div className="w-full py-8 mt-4 text-center">
         <Container>
           <div className="flex flex-wrap">
-            {posts?.map((post) => (
-              <div key={post.$id} className="p-2 w-1/4">
-                <PostCard {...post} />
-              </div>
-            ))}
+            <div className="p-2 w-full">
+              <h1 className="text-2xl font-bold hover:text-gray-500">
+                No posts found
+              </h1>
+            </div>
           </div>
         </Container>
       </div>
-  )
+    );
+  }
+
+  return (
+    <div className="w-full py-8">
+      <Container>
+        <div className="flex flex-wrap">
+          {posts?.map((post) => (
+            <div key={post.$id} className="p-2 w-1/4">
+              <PostCard {...post} />
+            </div>
+          ))}
+        </div>
+      </Container>
+    </div>
+  );
 }
 
 export default Home;
