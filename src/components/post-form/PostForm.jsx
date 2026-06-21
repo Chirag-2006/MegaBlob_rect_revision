@@ -26,8 +26,8 @@ function PostForm({ post }) {
 
     if (post) {
       // new file ko phlae upload kro
-      const file = data.images[0]
-        ? await storageServices.fileUpload(data.images[0])
+      const file = data.featuredImage[0]
+        ? await storageServices.fileUpload(data.featuredImage[0])
         : null;
 
       // fir file ko delete kro taki updated image hi ho after post edit
@@ -99,6 +99,8 @@ function PostForm({ post }) {
 
     return () => subscription.unsubscribe();
   }, [watch, setValue, SlugTransFormation]);
+
+  console.log("post in PostForm",post)
 
   return (
     <>

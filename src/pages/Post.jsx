@@ -14,6 +14,9 @@ function Post() {
   const userData = useSelector((state) => state.userData);
   const isAuthor = post && userData ? post.userId === userData.$id : false;
 
+  console.log("userData in Post",userData)
+  console.log("isAuthoer",isAuthor)
+
   console.log("post in Post", post);
   useEffect(() => {
     if (id) {

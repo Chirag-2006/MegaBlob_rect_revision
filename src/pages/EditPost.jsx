@@ -5,7 +5,7 @@ import { Container, PostForm } from "../components";
 
 function EditPost() {
   const { id } = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState(null);
   const navigate = useNavigate();
 
   console.log("id in editpost",id)
