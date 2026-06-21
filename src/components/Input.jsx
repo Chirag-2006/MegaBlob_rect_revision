@@ -1,6 +1,6 @@
 import { useId } from "react";
 
-function Input({ label, type = "text",ref, className = "", ...props }) {
+function Input({ label, type = "text", ref, className = "", ...props }) {
 
   const id = useId();
   return (
