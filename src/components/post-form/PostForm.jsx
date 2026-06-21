@@ -116,10 +116,10 @@ function PostForm({ post }) {
             placeholder="Slug"
             className="mb-4"
             {...register("slug", { required: true })}
-            onInput={(e) => {
+            onChange={(e) => {
               setValue("slug", SlugTransFormation(e.target.value), {
                 shouldValidate: true,
-              });
+              }); // if i am remove it what will happned?
             }}
           />
           <RTE
