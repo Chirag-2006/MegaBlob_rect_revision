@@ -14,7 +14,7 @@ function Login() {
   const [error, setError] = useState("");
 
   async function Login(data) {
-    console.log("data in login component", data);
+    // console.log("data in login component", data);
     try {
       setError("");
       const session = await authService.login(data);
