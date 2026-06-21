@@ -14,9 +14,11 @@ function Post() {
   const userData = useSelector((state) => state.userData);
   const isAuthor = post && userData ? post.userId === userData.$id : false;
 
+  console.log("post in Post", post);
   useEffect(() => {
     if (id) {
       dbServices.getPostById(id).then((postById) => {
+        console.log("postByID",postById)
         if (postById) {
           setPost(postById);
         } else {

@@ -16,6 +16,7 @@ function Input({ label, type = "text", ref, className = "", ...props }) {
         ref={ref}
         {...props}
         id={id}
+        
       />
     </div>
   );

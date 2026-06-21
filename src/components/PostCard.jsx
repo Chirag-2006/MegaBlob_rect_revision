@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import storageServices from "../appwrite/storage";
 
 function PostCard({ $id, title, featuredImage }) {
+  // function getFile(){
+  //  const filePreviewData = storageServices.filePreview(featuredImage)
+   
+  // }
+
+
   return (
     <Link to={`/post/${$id}`}>
       <div className="w-full bg-gray-100 rounded-xl p-4">

@@ -10,11 +10,11 @@ function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
-        title: post.title || "",
-        slug: post.slug || "",
-        content: post.content || "",
-        featuredImage: post.featuredImage || "",
-        status: post.status || "",
+        title: post?.title || "",
+        slug: post?.slug || "",
+        content: post?.content || "",
+        featuredImage: post?.featuredImage || "",
+        status: post?.status || "",
       },
     });
   const navigate = useNavigate();
@@ -49,9 +49,13 @@ function PostForm({ post }) {
     // nhi to new post create kanra hai
     else {
       // data se first image extract kro
-      const file = data.images[0]
-        ? await storageServices.fileUpload(data.images[0])
+      console.log("dataa", data);
+
+      const file = data.featuredImage[0]
+        ? await storageServices.fileUpload(data.featuredImage[0])
         : null;
+
+      console.log("file", file);
 
       // aagar file ho to hi post create kro
       if (file) {
@@ -62,6 +66,7 @@ function PostForm({ post }) {
           userId: userData.$id,
         });
 
+        console.log("created Post", createdPost);
         // aagar post create hua to hi redirect kro
         if (createdPost) {
           navigate(`/post/${createdPost.$id}`);
@@ -116,11 +121,13 @@ function PostForm({ post }) {
             placeholder="Slug"
             className="mb-4"
             {...register("slug", { required: true })}
-            onChange={(e) => {
+            onInput={(e) => {
               setValue("slug", SlugTransFormation(e.target.value), {
                 shouldValidate: true,
               }); // if i am remove it what will happned?
             }}
+            disabled={true}
+            // readOnly
           />
           <RTE
             name={"content"}
@@ -140,8 +147,8 @@ function PostForm({ post }) {
           {post && (
             <div className="w-full mb-4">
               <img
-                src={storageServices.filePreview(post.featuredImage)}
-                alt={post.title}
+                src={storageServices.filePreview(post?.featuredImage)}
+                alt={post?.title}
                 className="rounded-lg"
               />
             </div>

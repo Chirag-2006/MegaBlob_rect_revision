@@ -104,7 +104,7 @@ const router = createBrowserRouter(
           <SignUpPage />
         </AuthLayout>
       } />
-      <Route path="all-post" element={
+      <Route path="all-posts" element={
         <AuthLayout authentication={true}>
           <AllPosts />
         </AuthLayout>

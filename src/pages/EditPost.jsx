@@ -7,17 +7,22 @@ function EditPost() {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const navigate = useNavigate();
+
+  console.log("id in editpost",id)
   useEffect(() => {
     if (id) {
       dbServices.getPostById(id).then((postById) => {
         if (postById) {
           setPost(postById);
         }
+        console.log("postById in editpost",postById)
       });
     } else {
       navigate("/");
     }
   }, [id, navigate]);
+  
+  console.log("post in editpost",post)
 
   return (
     <>
