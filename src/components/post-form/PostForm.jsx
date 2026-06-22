@@ -14,7 +14,7 @@ function PostForm({ post }) {
         slug: post?.slug || "",
         content: post?.content || "",
         featuredImage: post?.featuredImage || "",
-        status: post?.status || "",
+        status: post?.status || "active",
       },
     });
   const navigate = useNavigate();
