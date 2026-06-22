@@ -1,5 +1,6 @@
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
+import config from "../config/config";
 
 function RTE({ name, control, label, defaultValue = "" }) {
   return (
@@ -10,7 +11,7 @@ function RTE({ name, control, label, defaultValue = "" }) {
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
-           apiKey='9hsb5o1xtjee1otiw9yewtio07odbnhfh1bvv9nvrasfq4fs'
+            apiKey={config.tinymceKey}
             initialValue={defaultValue}
             init={{
               height: 500,
@@ -37,8 +38,8 @@ function RTE({ name, control, label, defaultValue = "" }) {
                 "wordcount",
                 "anchor",
               ],
-               toolbar:
-            "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+              toolbar:
+                "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
               content_style:
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}

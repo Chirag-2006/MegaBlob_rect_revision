@@ -26,8 +26,8 @@ function PostForm({ post }) {
 
     if (post) {
       // new file ko phlae upload kro
-      const file = data.featuredImage[0]
-        ? await storageServices.fileUpload(data.featuredImage[0])
+      const file = data?.featuredImage[0]
+        ? await storageServices.fileUpload(data?.featuredImage[0])
         : null;
 
       // fir file ko delete kro taki updated image hi ho after post edit
@@ -37,8 +37,8 @@ function PostForm({ post }) {
 
       // postdata ko update kro
       const updataPostData = await dbServices.updatePost(post.$id, {
-        ...post,
-        featuredImage: file.$id || undefined,
+        ...data,
+        featuredImage: file?.$id || undefined,
       });
 
       if (updataPostData) {
@@ -100,7 +100,7 @@ function PostForm({ post }) {
     return () => subscription.unsubscribe();
   }, [watch, setValue, SlugTransFormation]);
 
-  console.log("post in PostForm",post)
+  console.log("post in PostForm", post);
 
   return (
     <>
@@ -135,7 +135,7 @@ function PostForm({ post }) {
             name={"content"}
             label={"Content :"}
             control={control}
-            defaultValue={post ? getValues("content") : ""}
+            defaultValue={getValues("content")}
           />
         </div>
         <div className="w-1/3 px-2">
@@ -144,7 +144,7 @@ function PostForm({ post }) {
             type={"file"}
             className="mb-4"
             accept="image/png, image/jpg, image/jpeg, image/gif"
-            {...register("featuredImage", { required: true })}
+            {...register("featuredImage", { required: !post })}
           />
           {post && (
             <div className="w-full mb-4">
