@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import dbServices from "../appwrite/database";
-import { Container, PostCard } from "../components";
+import { Buttton, Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -27,6 +28,18 @@ function Home() {
               <h1 className="text-2xl font-bold hover:text-gray-500">
                 Login to read posts
               </h1>
+              <div className="flex justify-center items-center space-x-2">
+                <Link to="/login">
+                  <Buttton className="mt-2" type="button">
+                    Login
+                  </Buttton>
+                </Link>
+                <Link to="/signup">
+                  <Buttton className="mt-2" type="button">
+                    SignUp
+                  </Buttton>
+                </Link>
+              </div>
             </div>
           </div>
         </Container>

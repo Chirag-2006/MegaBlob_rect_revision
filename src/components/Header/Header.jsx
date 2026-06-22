@@ -45,7 +45,7 @@ function Header() {
             </Link>
           </div>
           <div className="">
-            <h1 className="text-2xl font-bold hover:text-gray-500">
+            <h1 className="text-2xl font-bold">
               {userData && userData.name}
             </h1>
           </div>
