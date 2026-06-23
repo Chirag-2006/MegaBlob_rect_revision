@@ -1,0 +1,14 @@
+
+simple:
+    1. input aagr password ho to hide aur unhide functionlity
+
+hard:
+    1. post ka bhi slice react redux toolkit ka jesea
+    2. api hits ko kam kro like sabhi jaght bhut hit ho rha hai
+    3. 
+
+features:
+    1. search functionlity
+    2. sorting functionlity
+    3. user aapne post ko khud ke self (Mypost) me dekh paye jo usne khud banaye hai
+    4. 
