@@ -13,7 +13,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userData) {
+    if (userData && posts.length === 0) {
       // dbServices.getPosts().then((allPosts) => {
       //   if (allPosts) {
       //     setPosts(allPosts.rows);

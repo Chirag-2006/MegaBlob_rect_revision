@@ -4,7 +4,7 @@ import { createPost, deletePost, fetchPosts, updatePost } from "./postThunk";
 const initialState = {
   //   selectedPost: null,
   posts: [],
-  loading: true,
+  loading: false,
   error: null,
 };
 
