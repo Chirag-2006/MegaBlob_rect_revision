@@ -1,23 +1,31 @@
-import { useEffect, useState } from "react";
-import dbServices from "../appwrite/database";
+import { useEffect } from "react";
+// import dbServices from "../appwrite/database";
 import { Buttton, Container, PostCard } from "../components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchPosts } from "../store/post/postThunk";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
-
+  // const [posts, setPosts] = useState([]);
   const userData = useSelector((state) => state.auth.userData);
+  const { posts, loading } = useSelector((state) => state.post);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userData) {
-      dbServices.getPosts().then((allPosts) => {
-        if (allPosts) {
-          setPosts(allPosts.rows);
-        }
-      });
+      // dbServices.getPosts().then((allPosts) => {
+      //   if (allPosts) {
+      //     setPosts(allPosts.rows);
+      //   }
+      // });
+      dispatch(fetchPosts());
     }
-  }, []);
+  }, [userData, dispatch]);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   if (!userData) {
     return (
@@ -68,7 +76,7 @@ function Home() {
       <Container>
         <div className="flex flex-wrap">
           {posts?.map((post) => (
-            <div key={post.$id} className="p-2 w-1/4">
+            <div key={post.$id} className="p-2 w-full sm:w-1/2 lg:w-1/4">
               <PostCard {...post} />
             </div>
           ))}
