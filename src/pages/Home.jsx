@@ -21,7 +21,7 @@ function Home() {
       // });
       dispatch(fetchPosts());
     }
-  }, [userData, dispatch]);
+  }, [userData]);
 
   if (loading) {
     return <h1>Loading...</h1>;
