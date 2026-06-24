@@ -21,7 +21,9 @@ const postSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload;
+        state.posts = action.payload.sort(
+          (a, b) => new Date(b.$createdAt) - new Date(a.$createdAt),
+        );
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
@@ -35,7 +37,9 @@ const postSlice = createSlice({
 
       // CREATE POST
       .addCase(createPost.fulfilled, (state, action) => {
-        state.posts.unshift(action.payload);
+        console.log("Adding post to state:", action.payload);
+        state.posts.push(action.payload);
+        console.log("Updated posts:", state.posts);
       })
 
       // UPDATE POST
