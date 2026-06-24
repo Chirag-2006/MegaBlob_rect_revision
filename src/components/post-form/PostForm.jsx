@@ -61,6 +61,20 @@ function PostForm({ post }) {
     setLoading(true);
 
     try {
+      // ✅ Content validation
+      const cleanContent = data.content?.replace(/<[^>]*>/g, "").trim();
+      if (!cleanContent || cleanContent.length === 0) {
+        toast.error("Please add some content!");
+        setLoading(false);
+        return;
+      }
+
+      if (!post && !data.featuredImage[0]) {
+        toast.error("Please select a featured image");
+        setLoading(false);
+        return;
+      }
+
       // aagar post hua to usko edit karna hai
 
       // === UPDATE FLOW ===
@@ -98,7 +112,7 @@ function PostForm({ post }) {
       else {
         // 1. Check if image provided
         if (!data.featuredImage[0]) {
-          toast.error("Please select a featured image");
+          toast.error("Please select an a image");
           setLoading(false);
           return;
         }
@@ -118,6 +132,8 @@ function PostForm({ post }) {
 
         // 5. Handle response
         if (createPost.fulfilled.match(result)) {
+          console.log("Created Post Data:", result.payload); // ✅ Check karo
+          console.log("Post ID:", result.payload.$id);
           toast.success("Post created successfully! 🎉");
           navigate(`/post/${result.payload.$id}`);
         } else {
@@ -226,7 +242,7 @@ function PostForm({ post }) {
               label={"Slug :"}
               placeholder="Slug"
               {...register("slug", {
-                required: "Slug is required",
+                required: true,
               })}
               readOnly
             />
@@ -234,12 +250,30 @@ function PostForm({ post }) {
               <p className="text-red-500 text-sm mt-1">{errors.slug.message}</p>
             )}
           </div>
-          <RTE
-            name={"content"}
-            label={"Content :"}
-            control={control}
-            defaultValue={getValues("content")}
-          />
+          <div className="mb-4">
+            <RTE
+              name={"content"}
+              label={"Content :"}
+              control={control}
+              defaultValue={getValues("content")}
+              rules={{
+                // ✅ Add validations
+                required: "Content is required",
+                validate: (value) => {
+                  const cleanText = value?.replace(/<[^>]*>/g, "").trim();
+                  if (!cleanText || cleanText.length === 0) {
+                    return "Content cannot be empty";
+                  }
+                  return true;
+                },
+              }}
+            />
+            {errors.content && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.content.message}
+              </p>
+            )}
+          </div>
         </div>
         <div className="w-1/3 px-2">
           <div className="mb-4">

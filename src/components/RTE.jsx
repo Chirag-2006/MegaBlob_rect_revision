@@ -2,14 +2,20 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 import config from "../config/config";
 
-function RTE({ name, control, label, defaultValue = "" }) {
+function RTE({ name, control, label, rules = {}, defaultValue = "" }) {
   return (
     <div className="w-full">
-      {label && <label className="inline-block mb-1 pl-1">{label}</label>}
+      {label && (
+        <label className="inline-block mb-1 pl-1">
+          {label}{" "}
+          {rules?.required && <span className="text-red-500 ml-1">*</span>}
+        </label>
+      )}
       <Controller
         name={name || "content"}
         control={control}
-        render={({ field: { onChange }, fieldState: { error } }) => (
+         rules={rules}
+        render={({ field: { onChange } }) => (
           <>
             <Editor
               apiKey={config.tinymceKey}
@@ -46,10 +52,10 @@ function RTE({ name, control, label, defaultValue = "" }) {
               }}
               onEditorChange={onChange}
             />
-            {/* ✅ ERROR SHOW KARO */}
+            {/* ✅ ERROR SHOW KARO
             {error && (
               <p className="text-red-500 text-sm mt-1">{error.message}</p>
-            )}
+            )} */}
           </>
         )}
       />

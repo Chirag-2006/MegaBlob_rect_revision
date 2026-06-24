@@ -3,7 +3,7 @@ import { Container, LogoutBtn, Logo } from "../index";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
-  const { authStatus, userData } = useSelector((state) => state.auth);
+  const { status : authStatus, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const navItems = [
@@ -34,6 +34,7 @@ function Header() {
     },
   ];
 
+    console.log(authStatus)
   return (
     <header className="py-3 shadow bg-gray-500">
       <Container>

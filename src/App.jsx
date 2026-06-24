@@ -5,11 +5,13 @@ import { login, logout } from "./store/auth/authSlice";
 import authService from "./appwrite/auth";
 import { Header, Footer } from "./components";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
+  // const { status: authStatus, userData } = useSelector((state) => state.auth);
 
   useEffect(() => {
     authService
@@ -30,6 +32,8 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  // console.log(toast.success("hello"))
+
   return (
     <>
       <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
@@ -41,6 +45,31 @@ function App() {
           <Footer />
         </div>
       </div>
+
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: "#4ade80",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            duration: 4000,
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
     </>
   );
 }
