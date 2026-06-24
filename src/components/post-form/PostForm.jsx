@@ -136,6 +136,7 @@ function PostForm({ post }) {
             label={"Content :"}
             control={control}
             defaultValue={getValues("content")}
+            
           />
         </div>
         <div className="w-1/3 px-2">
