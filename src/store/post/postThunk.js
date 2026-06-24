@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import dbServices from "../appwrite/database";
+import dbServices from "../../appwrite/database";
 
 export const fetchPosts = createAsyncThunk(
   "post/fetchPosts",
