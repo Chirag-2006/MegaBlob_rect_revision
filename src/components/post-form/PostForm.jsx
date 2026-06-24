@@ -19,7 +19,7 @@ function PostForm({ post }) {
     });
   const navigate = useNavigate();
 
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   async function onSubmit(data) {
     // aagar post hua to usko edit karna hai

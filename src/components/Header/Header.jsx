@@ -3,8 +3,8 @@ import { Container, LogoutBtn, Logo } from "../index";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
-  const authStatus = useSelector((state) => state.status);
-  const userData = useSelector((state) => state.userData);
+  const authStatus = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
 
   const navItems = [

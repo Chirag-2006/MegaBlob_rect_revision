@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [posts, setPosts] = useState([]);
 
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
     if (userData) {
