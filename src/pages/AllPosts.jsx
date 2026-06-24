@@ -1,22 +1,32 @@
-import { useEffect, useState } from "react";
-import dbServices from "../appwrite/database";
+import { useEffect } from "react";
+// import dbServices from "../appwrite/database";
 import { Container, PostCard } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../store/post/postThunk";
 
 function AllPosts() {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
+  const { posts, loading } = useSelector((state) => state.post);
 
   useEffect(() => {
-    dbServices
-      .getPosts()
-      .then((allPosts) => {
-        if (allPosts) {
-          setPosts(allPosts.rows);
-        }
-      })
-      .catch((err) => console.log("Failed to get Posts : AllPosts Page", err));
-  }, []);
+    // dbServices
+    //   .getPosts()
+    //   .then((allPosts) => {
+    //     if (allPosts) {
+    //       setPosts(allPosts.rows);
+    //     }
+    //   })
+    //   .catch((err) => console.log("Failed to get Posts : AllPosts Page", err));
 
-  console.log("posts in all Post page",posts)
+    if (posts.length === 0) {
+      dispatch(fetchPosts());
+    }
+  }, [posts.length]);
+
+  console.log("posts in all Post page", posts);
+
+  if (loading) return <h1>Loading...</h1>;
 
   return (
     <>

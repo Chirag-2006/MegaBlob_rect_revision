@@ -3,8 +3,7 @@ import { Container, LogoutBtn, Logo } from "../index";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
-  const authStatus = useSelector((state) => state.status);
-  const userData = useSelector((state) => state.userData);
+  const { status : authStatus, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const navItems = [
@@ -35,6 +34,7 @@ function Header() {
     },
   ];
 
+    console.log(authStatus)
   return (
     <header className="py-3 shadow bg-gray-500">
       <Container>
@@ -45,9 +45,7 @@ function Header() {
             </Link>
           </div>
           <div className="">
-            <h1 className="text-2xl font-bold">
-              {userData && userData.name}
-            </h1>
+            <h1 className="text-2xl font-bold">{userData && userData.name}</h1>
           </div>
           <ul className="flex ml-auto space-x-2">
             {navItems.map((item) =>
