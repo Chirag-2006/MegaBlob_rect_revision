@@ -13,16 +13,16 @@ export const fetchPosts = createAsyncThunk(
   },
 );
 
-export const fetchPostById = createAsyncThunk(
-  "post/fetchPostById",
-  async (id, thunkAPI) => {
-    try {
-      return await dbServices.getPostById(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
+// export const fetchPostById = createAsyncThunk(
+//   "post/fetchPostById",
+//   async (id, thunkAPI) => {
+//     try {
+//       return await dbServices.getPostById(id);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   },
+// );
 
 export const createPost = createAsyncThunk(
   "post/createPost",
