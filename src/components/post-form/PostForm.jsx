@@ -14,16 +14,23 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, watch, setValue, control, getValues } =
-    useForm({
-      defaultValues: {
-        title: post?.title || "",
-        slug: post?.slug || "",
-        content: post?.content || "",
-        featuredImage: post?.featuredImage || "",
-        status: post?.status || "active",
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    control,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: post?.title || "",
+      slug: post?.slug || "",
+      content: post?.content || "",
+      featuredImage: post?.featuredImage || "",
+      status: post?.status || "active",
+    },
+  });
 
   // why use useCallback? => Function recreate nahi hoga every render. Performance optimization. Especially because dependency me use hua:
   const SlugTransFormation = useCallback((value) => {
@@ -195,31 +202,38 @@ function PostForm({ post }) {
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap">
         <div className="w-2/3 px-2">
-          <Input
-            label={"Title :"}
-            placeholder="Title"
-            className="mb-4"
-            {...register("title", {
-              required: "Title is required",
-              minLength: {
-                value: 2,
-                message: "Title must be at least 2 characters long",
-              },
-            })}
-          />
-          <Input
-            label={"Slug :"}
-            placeholder="Slug"
-            className="mb-4"
-            {...register("slug", { required: "Slug is required" })}
-            onChange={(e) => {
-              setValue("slug", SlugTransFormation(e.target.value), {
-                shouldValidate: true,
-              }); // if i am remove it what will happned?
-            }}
-            // disabled={true}
-            readOnly
-          />
+          <div className="mb-4">
+            <Input
+              label={"Title :"}
+              placeholder="Title"
+              {...register("title", {
+                required: "Title is required",
+                minLength: {
+                  value: 2,
+                  message: "Title must be at least 2 characters long",
+                },
+              })}
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.title.message}
+              </p>
+            )}
+          </div>
+          {/* SLUG FIELD */}
+          <div className="mb-4">
+            <Input
+              label={"Slug :"}
+              placeholder="Slug"
+              {...register("slug", {
+                required: "Slug is required",
+              })}
+              readOnly
+            />
+            {errors.slug && (
+              <p className="text-red-500 text-sm mt-1">{errors.slug.message}</p>
+            )}
+          </div>
           <RTE
             name={"content"}
             label={"Content :"}
@@ -228,31 +242,48 @@ function PostForm({ post }) {
           />
         </div>
         <div className="w-1/3 px-2">
-          <Input
-            label={"Image :"}
-            type={"file"}
-            className="mb-4"
-            accept="image/png, image/jpg, image/jpeg, image/gif"
-            {...register("featuredImage", {
-              required: !post ? "Image is required" : false,
-            })}
-          />
-          {post && (
-            <div className="w-full mb-4">
-              <img
-                src={storageServices.filePreview(post?.featuredImage)}
-                alt={post?.title}
-                className="rounded-lg"
-              />
-            </div>
-          )}
+          <div className="mb-4">
+            <Input
+              label={"Image :"}
+              type={"file"}
+              accept="image/png, image/jpg, image/jpeg, image/gif"
+              {...register("featuredImage", {
+                required: !post ? "Image is required" : false,
+              })}
+            />
+            {errors.featuredImage && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.featuredImage.message}
+              </p>
+            )}
 
-          <Select
-            label={"Status :"}
-            options={["active", "inactive"]}
-            {...register("status", { required: true })}
-            className="mb-4"
-          />
+            {post && (
+              <div className="w-full mt-4">
+                <img
+                  src={storageServices.filePreview(post?.featuredImage)}
+                  alt={post?.title}
+                  className="rounded-lg"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* STATUS FIELD */}
+          <div className="mb-4">
+            <Select
+              label={"Status :"}
+              options={["active", "inactive"]}
+              {...register("status", {
+                required: "Status is required",
+              })}
+            />
+            {errors.status && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.status.message}
+              </p>
+            )}
+          </div>
+
           <Buttton
             type={"submit"}
             bgColor={post ? "bg-green-500" : undefined}
